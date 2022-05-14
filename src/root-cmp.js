@@ -26,8 +26,8 @@ function _App(props) {
 
 function mapStateToProps(storeState) {
   return {
-    count: storeState.countModule.count,
-    status: storeState.statusModule.status
+    // count: storeState.countModule.count,
+    // status: storeState.statusModule.status
   }
 }
 const mapDispatchToProps = {

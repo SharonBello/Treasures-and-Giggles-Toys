@@ -3,11 +3,15 @@ import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { loadToy } from '../store/actions/toy.action.js'
 import { login, signup, logout } from '../store/actions/user.action.js'
-import { LoginSignup } from './login-signup.jsx'
+import { Login } from './login.jsx'
+import { Signup } from './signup.jsx'
+import { UserMsg } from './user-msg.jsx'
+
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import Dialog from '@mui/material/Dialog'
-import DialogTitle from '@mui/material/DialogTitle';
-import { UserMsg } from './user-msg.jsx'
+import LogoutIcon from '@mui/icons-material/Logout';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 import { Search, LogoFull } from "../services/svg.service.js";
 
@@ -41,34 +45,40 @@ class _AppHeader extends React.Component {
     handleOpenDialog = () => {
         this.setState({ isModalOpen: true })
     }
-    
+
     onHandleCloseDialog = (ev) => {
         ev.preventDefault()
         this.setState({ isModalOpen: false })
     }
 
-    renderModal = () => {
+    renderLoginModal = () => {
         if (this.state.isModalOpen) {
-            console.log("dialog open");
             return (
-                <Dialog onClose={this.onHandleCloseDialog} open={true} >{this.renderLogin()} 
-                <DialogTitle>SignIn</DialogTitle>
-                </Dialog> 
+                <Dialog onClose={this.onHandleCloseDialog} open={true} >{this.renderLogin()}</Dialog>
             )
         }
     }
 
     renderLogin = () => {
-        if (this.props.user) {
+        return (
+            <Login onLogin={this.onLogin} onHandleCloseDialog={this.onHandleCloseDialog} handleOpenDialog={this.handleOpenDialog} isModalOpen={this.state.isModalOpen} />
+        )
+    }
+
+    renderSignupModal = () => {
+        if (this.state.isModalOpen) {
             return (
-                <button className="user-info" onClick={this.onLogout}>Logout</button>
-            )
-        } else {
-            return (
-                <LoginSignup onLogin={this.onLogin} onSignup={this.onSignup} />
+                <Dialog onClose={this.onHandleCloseDialog} open={true} >{this.renderSignup}</Dialog>
             )
         }
     }
+
+    renderSignup = () => {
+        return (
+            <Signup onSignup={this.onSignup} onHandleCloseDialog={this.onHandleCloseDialog} handleOpenDialog={this.handleOpenDialog} isModalOpen={this.state.isModalOpen} />
+        )
+    }
+
     render() {
         const { user } = this.props
         const { searchTerm } = this.state
@@ -80,8 +90,8 @@ class _AppHeader extends React.Component {
                 <section className="main-header-nav">
                     <div>
                         <ul className="main-nav clean-list flex">
-                            <li className=" btn-light"><NavLink to="/">Home</NavLink></li>
-                            <li className="home-link btn-light"><NavLink to="/toy">Toys</NavLink></li>
+                            <li className="home-link btn-light"><NavLink to="/">Home</NavLink></li>
+                            <li className="btn-light"><NavLink to="/toy">Toys</NavLink></li>
                             <li className=" btn-light"><NavLink to="/about">About</NavLink></li>
                         </ul>
                     </div>
@@ -93,16 +103,27 @@ class _AppHeader extends React.Component {
                         <input type="text" className="input-search" placeholder="Search" value={searchTerm} onChange={this.onHandleChange}></input>
                         <button className="main-header-search" ><Search /></button>
                     </div>
-                    <button onClick={this.handleOpenDialog}><AccountCircleIcon /></button>
-                    {this.renderModal()}
+                    <div className="login-btn-container">
+                        <button onClick={() => this.handleOpenDialog()}><AccountCircleIcon /></button>
+                        {this.renderLoginModal()}
+                        {this.renderLogin()}
+                    </div>
+                    <div className="signup-btn-container">
+                        <button onClick={() => this.handleOpenDialog()}>
+                            <FontAwesomeIcon baseClassName="fas" className="fa-user-plus" /></button>
+                        {this.renderSignupModal()}
+                        {this.renderSignup()}
+                    </div>
+                    <div className="logout-btn-container">
+                        <button className="user-logout" onClick={() => this.onLogout()}><LogoutIcon /></button>
+                    </div>
                 </section>
-
+                <i className="fa-solid fa-user-plus"></i>
                 <div className="header-title">
                     <LogoFull />
                     <p>Treasures<br></br><span>&</span><br></br>Giggles</p>
                 </div>
-                {this.renderLogin()}
-                
+
             </header>
         )
     }

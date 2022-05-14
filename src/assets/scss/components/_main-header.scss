@@ -11,7 +11,7 @@
         position: absolute;
         inset: 0;
         z-index: -1;
-        height: 55%;
+        max-height: 40%;
     }
 
     .main-header-nav {
@@ -98,11 +98,10 @@
         align-items: center;
         justify-content: center;
         width: 100%;
-        margin-top: 2em;
         flex-grow: 1;
 
         svg {
-            margin-top: 0.5em;
+            // margin-top: 0.5em;
             filter: drop-shadow(0px 0px 3px $clr8);
         }
 
@@ -112,7 +111,8 @@
             -webkit-text-fill-color: $clr6;
             line-height: 0.5em;
             text-align: center;
-            margin-bottom: 0.4em;
+            margin: unset;
+            padding: unset;
             margin-top: 0.1em;
 
             span {
@@ -123,10 +123,42 @@
         }
     }
 
-    .login-signup-container {
+    .login-container {
         display: flex;
         flex-direction: row;
         margin-top: 0;
         display: none;
     }
+    .signup-container {
+        display: flex;
+        flex-direction: row;
+        margin-top: 0;
+        display: none;
+    }
+}
+
+
+.user-msg {
+    color:white;
+    padding: 10px;
+    font-size: 1.4em;
+    position: fixed;
+    top: rem(200px);
+    right:0;
+    background-color: grey;
+}
+
+.user-msg button {
+    float:right;
+    border:0;
+    border-radius: 50%;
+    margin: 5px;
+}
+
+.success {
+    background-color: rgb(181, 237, 193);
+}
+
+.danger {
+    background-color: rgb(228, 146, 146);
 }

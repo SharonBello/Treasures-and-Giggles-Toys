@@ -81,6 +81,6 @@ function _handleLogin(user) {
 //     activities: [{txt: 'Added a Toy', at: 1523873242735}]
 // })
 
-// userService.login({username: 'muki', password: 'muki1'})
+// userService.login({username: 'miki', password: 'miki'})
 
 

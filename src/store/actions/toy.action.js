@@ -7,7 +7,6 @@ export function loadToy() {
     return (dispatch, getState) => {
         const filterBy = getState().toyModule.filterBy
         return toyService.query(filterBy).then((toys) => {
-            console.log('toys', toys)
             dispatch({
                 type: 'SET_TOYS',
                 toys
@@ -51,7 +50,6 @@ export function saveToy(toy) {
     return dispatch => {
         return toyService.save(toy)
             .then(savedToy => {
-                console.log(savedToy)
                 dispatch({
                     type: 'SAVE_TOY',
                     toy: savedToy
@@ -68,9 +66,7 @@ export function saveToy(toy) {
 export function addToy(toy) {
     return dispatch => {
         return toyService.save(toy)
-        .then(savedToy => {
-                console.log('add' )
-                
+            .then(savedToy => {
                 dispatch({
                     type: 'ADD_TOY',
                     toy: savedToy

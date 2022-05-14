@@ -1,3 +1,4 @@
+import React from "react"
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { toyService } from "../services/toy.service.js"
@@ -5,9 +6,6 @@ import { userService } from "../services/user.service.js"
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 
 import { removeToy, getById } from "../store/actions/toy.action.js"
-// import {addActivity} from "../store/actions/user.action.js"
-import React from "react"
-
 
 class _ToyDetails extends React.Component {
 
@@ -22,7 +20,6 @@ class _ToyDetails extends React.Component {
 
     onRemoveToy = (toyId) => {
         this.props.removeToy(toyId)
-        // this.props.addActivity({ txt: 'Removed a Toy', at: Date.now() })
         this.onGoBack()
 
     }
@@ -67,7 +64,6 @@ const mapStateToProps = (storeState) => {
 
 const mapDispatchToProps = {
     removeToy,
-    // addActivity,
     getById,
 }
 

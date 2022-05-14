@@ -14,18 +14,18 @@ class _UserProfile extends React.Component {
         const { value } = target
         let key = target.name
         key === 'fullname'
-        ?
-        this.setState({ user: { ...this.state.user, fullname: value } })
-        :
-        this.setState((prevState) => ({
-            user: {
-                ...prevState.user,
-                prefs: {
-                    ...prevState.user.prefs,
-                    [key]: value
+            ?
+            this.setState({ user: { ...this.state.user, fullname: value } })
+            :
+            this.setState((prevState) => ({
+                user: {
+                    ...prevState.user,
+                    prefs: {
+                        ...prevState.user.prefs,
+                        [key]: value
+                    }
                 }
-            }
-        }))
+            }))
     }
 
     onSaveUser = (ev) => {
