@@ -13,7 +13,7 @@ class _ToyApp extends React.Component {
 
     state = {
         user: userService.getLoggedinUser(),
-        pageSize: 3,
+        pageSize: 4,
         filter: {
             labels: []
         },

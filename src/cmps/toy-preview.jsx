@@ -28,10 +28,10 @@ export function ToyPreview({ toy, onRemoveToy }) {
             {toy.name === 'Robot' && <img className='card-image' src={Robot} alt="img of Robot"/>}
             {toy.name === 'Stuffed_Monkey' && <img className='card-image' src={Stuffed_Monkey} alt="img of train"/>}
             <img className='toy-img' src={toy.img || defaultImage} alt="a Toy"/>
-            <div>
-                <button onClick={() => onRemoveToy(toy._id)}>x</button>
-                <Link to={`/toy/edit/${toy._id}`}><button>Edit</button></Link>
-                <Link to={`/toy/${toy._id}`}><button>Details</button></Link>
+            <div className='toy-preview-btns flex flex-row'>
+                <button onClick={() => onRemoveToy(toy._id)} className='toy-preview-btn'>x</button>
+                <Link to={`/toy/edit/${toy._id}`}><button className='toy-preview-btn'>Edit</button></Link>
+                <Link to={`/toy/${toy._id}`}><button className='toy-preview-btn'>Details</button></Link>
             </div>
         </li>
 

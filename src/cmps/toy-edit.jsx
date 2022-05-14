@@ -92,6 +92,12 @@ console.log('selectedOption', selectedOption)
                     <label htmlFor="toy-name"><h3>Name:</h3></label>
                     <input type="text" name="name" value={toy.name} id="toy-name" onChange={this.onHandleChange} required />
 
+                    <label htmlFor="imageFile" className="label-for-img tooltip">
+                            <span className="tooltiptext">Load image</span>
+                            <img className="action-img note-img-select" src="assets/img/image.png"></img>
+                            <input className="img-input" hidden={true} type="file" accept="image/*" id="imageFile" name='imageFile'/>
+                        </label>
+
                     <label htmlFor="edit-img">Image</label>
                     <input type="url" name="img" id="edit-img" value={toy.img} onChange={this.onHandleChange} />
                     <img className="toy-img" src={toy.img || defaultImage} alt="toy" />
