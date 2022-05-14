@@ -64,8 +64,12 @@ class _ToyApp extends React.Component {
         this.props.setFilter(filterBy)
     }
 
+    
     handleChangeLabels = (labels) => {
         console.log('handleChangeLabels', labels)
+        // this.setState((prevState) => ({ toy: {...prevState.toy, 
+        //     labels: labels.map(option => option.value)} }))
+
         this.setState({ filter: { ...this.state.filter, labels }})
         let { filterBy } = this.props
         const labelsToys = this.state.filter.labels.map(label => label.value)
@@ -79,7 +83,7 @@ class _ToyApp extends React.Component {
         const { user } = this.state
         return (
             <section className="app-section">
-                <h3>Toy App</h3>
+                
                 {/* <div className="pagings">
                     <label htmlFor='by-pageIdx'>Choose Page</label>
                     <button onClick={this.pageDown}>-</button>
@@ -88,7 +92,7 @@ class _ToyApp extends React.Component {
                 </div> */}
                 <ToyFilter filterBy={filterBy} onHandleChange={this.onHandleChange}   onChangePage={this.onChangePage} handleChangeLabels={this.handleChangeLabels} labels={this.state.filter.labels}/>
                 {/* {user && <Link to="/toy/edit"><button>Add Toy 📋</button></Link>} */}
-                <Link to="/toy/edit"><button>Add Toy 📋</button></Link>
+                <Link to="/toy/edit"><button className="toy-btn-add">Add Toy 📋</button></Link>
                 {(!toys) ? <h1>Loading</h1> : <ToyList toys={toys} onRemoveToy={this.onRemoveToy} />}
                 
             </section>

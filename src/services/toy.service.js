@@ -17,6 +17,7 @@ export const toyService = {
 }
 
 function query(filterBy = { txt: '', pageIdx: 0, labels: [] }) {
+    console.log('filterBy', filterBy)
     return storageService.query(STORAGE_KEY)
         .then(toys => {
 
@@ -24,7 +25,15 @@ function query(filterBy = { txt: '', pageIdx: 0, labels: [] }) {
                 const regex = new RegExp(filterBy.txt, 'i')
                 toys = toys.filter(toy => regex.test(toy.name) || regex.test(toy.ctg))
             }
+            console.log('toys', toys)
+            console.log('filterBy.labels', filterBy.labels)
+    
+            if (filterBy.labels.length > 0) {
+                toys = toys.filter(toy =>
+                    toy.labels.filter(label => filterBy.labels.includes(label)).length > 0)
+            }
 
+            console.log('toys', toys)
             if (filterBy.inStock) {
                 console.log('in stock')
                 toys = toys.filter(toy => {
@@ -33,11 +42,7 @@ function query(filterBy = { txt: '', pageIdx: 0, labels: [] }) {
                     return JSON.parse(filterBy.inStock) === toy.inStock
                 })
             }
-            if (filterBy.labels.length > 0) {
-                toys = toys.filter(toy =>
-                    toy.labels.filter(label => filterBy.labels.includes(label)).length > 0)
-            }
-
+            console.log('toys', toys)
             if (filterBy.sortBy === 'name') {
                 toys = toys.sort((a, b) => {
                     if (a.name.toLowerCase() < b.name.toLowerCase()) return -1
@@ -50,13 +55,14 @@ function query(filterBy = { txt: '', pageIdx: 0, labels: [] }) {
             } else if (filterBy.sortBy === 'recent') {
                 toys = toys.sort((a, b) => b.createdAt - a.createdAt)
             }
-
+            console.log('toys', toys)
             if (filterBy.pageIdx !== undefined) {
                 const startIdx = +filterBy.pageIdx * PAGE_SIZE
                 if (startIdx > toys.length - 1) return Promise.reject()
                 toys = toys.slice(startIdx, startIdx + PAGE_SIZE)
             }
 
+            console.log('toys', toys)
             return toys
 
         })

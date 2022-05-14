@@ -50,3 +50,25 @@
         }
     }
 }
+
+
+.toy-img {
+    width: 100px;
+}
+
+.toy-list {
+    display: flex;
+    gap: 20px;
+}
+
+.toy-preview {
+    align-items: center;
+    margin: unset;
+    padding: unset;
+    gap: 10px;
+    p, h4 {
+        margin: unset;
+        padding: unset;
+    
+    }
+}

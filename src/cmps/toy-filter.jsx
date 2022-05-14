@@ -18,50 +18,55 @@ export class _ToyFilter extends React.Component{
     render(){
         const { onHandleChange, filterBy, onChangePage, labels, handleChangeLabels } = this.props
          return (
-            <div className="toy-filter-container">
-            <input name="txt" type="search" placeholder="Search..." value={filterBy.txt} onChange={onHandleChange} />
-            <label htmlFor='in-stock'>In stock:</label>
-            <select name='inStock' id='by-stock' onChange={onHandleChange}>
-                <option value=''>All</option>
-                <option value='true'>In stock</option>
-                <option value='false'>Out of stock</option>
-            </select>
-            {/* 
-            <label htmlFor="toy-lbl"><h3>Labels:</h3></label>
-        <Select isMulti  value={currToyLabels} onChange={this.handleChange} options={options} /> */}
+            <div className="toy-filter-container flex flex-column">
+                <div className="toy-filter-no-labels flex flex-row">
+                    <input name="txt" type="search" placeholder="Search..." value={filterBy.txt} onChange={onHandleChange} />
+                    <label htmlFor='in-stock'>In stock:</label>
 
-            <label htmlFor='by-sort'>Sort Toys:</label>
-            <select name='sortBy' id='by-sort' onChange={onHandleChange}>
-                {/* <option value=''>All</option> */}
-                <option value='name'>Name</option>
-                <option value='price'>Price</option>
-                <option value='recent'>Recently Added</option>
-            </select>
+                    <select name='inStock' id='by-stock' onChange={onHandleChange}>
+                        <option value=''>All</option>
+                        <option value='true'>In stock</option>
+                        <option value='false'>Out of stock</option>
+                    </select>
+                    {/* 
+                    <label htmlFor="toy-lbl"><h3>Labels:</h3></label>
+                <Select isMulti  value={currToyLabels} onChange={this.handleChange} options={options} /> */}
 
-            < MultiSelect
-                        value={labels}
-                        closeMenuOnSelect={false}
-                        onChange={handleChangeLabels}
-                        isMulti
-                        name="labels"
-                        options={options}
-                        className="basic-multi-select"
-                        classNamePrefix="select"
-                    />
+                    <label htmlFor='by-sort'>Sort Toys:</label>
+                    <select name='sortBy' id='by-sort' onChange={onHandleChange}>
+                        {/* <option value=''>All</option> */}
+                        <option value='name'>Name</option>
+                        <option value='price'>Price</option>
+                        <option value='recent'>Recently Added</option>
+                    </select>
+
+                    <div className="pagings">
+                        <label htmlFor='by-pageIdx'>Choose Page</label>
+                        <button onClick={() => onChangePage(-1)}>-</button>
+
+                        (<h3 style={{ display: 'inline' }}>
+                            -{+(+filterBy.pageIdx + 1)}-
+                        </h3>
+                        )
+                        <button onClick={() => onChangePage(1)}>+</button>
+                    </div>
+                </div>
+                <div className="toy-label flex "> 
+                < MultiSelect
+                            value={labels}
+                            closeMenuOnSelect={false}
+                            onChange={handleChangeLabels}
+                            isMulti
+                            name="labels"
+                            options={options}
+                            className="basic-multi-select"
+                            classNamePrefix="select"
+                        />
+                </div>
 
             {/* <select name="labels" onChange={onHandleChange} multiple size={5}>
                 {toyService.getLabels().map(label => <option key={label} value={label}>{label}</option>)}
             </select> */}
-            <div className="pagings">
-                <label htmlFor='by-pageIdx'>Choose Page</label>
-                <button onClick={() => onChangePage(-1)}>-</button>
-
-                (<h3 style={{ display: 'inline' }}>
-                    -{+(+filterBy.pageIdx + 1)}-
-                </h3>
-                )
-                <button onClick={() => onChangePage(1)}>+</button>
-            </div>
 
         </div>
     )
