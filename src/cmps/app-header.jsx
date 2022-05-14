@@ -7,6 +7,7 @@ import { LoginSignup } from './login-signup.jsx'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle';
+import { UserMsg } from './user-msg.jsx'
 
 import { Search, LogoFull } from "../services/svg.service.js";
 
@@ -73,7 +74,8 @@ class _AppHeader extends React.Component {
         const { searchTerm } = this.state
         return (
             <header className="main-header">
-                <img src="img/carousel.gif" alt="" />
+                <img className="toy-img-header" src="img/carousel.gif" alt="" />
+                <UserMsg />
 
                 <section className="main-header-nav">
                     <div>

@@ -16,6 +16,7 @@ class _ToyEdit extends React.Component {
     state = {
         toy: toyService.getEmptyToy(),
         user: userService.getLoggedinUser(),
+        selectedOption:[]
     }
 
     componentDidMount() {
@@ -32,14 +33,20 @@ class _ToyEdit extends React.Component {
         this.props.history.push('/toy')
     }
 
+    // handleChange = (selectedOption) => {
+    //     console.log('selectedOption', selectedOption)
+    //     this.setState((prevState) => ({
+    //         toy: {
+    //             ...prevState.toy,
+    //             // labels: selectedOption.map(option => option.value)} }))
+    //             labels: this.props.setSelected.map(option => option.value)
+    //         }
+    //     }))
+    // }
+
     handleChange = (selectedOption) => {
-        this.setState((prevState) => ({
-            toy: {
-                ...prevState.toy,
-                // labels: selectedOption.map(option => option.value)} }))
-                labels: this.props.setSelected(selectedOption.map(option => option.value))
-            }
-        }))
+        this.setState((prevState) => ({ toy: {...prevState.toy, 
+            labels: selectedOption.map(option => option.value)} }))
     }
 
     onHandleChange = ({ target }) => {
@@ -75,19 +82,25 @@ class _ToyEdit extends React.Component {
             { value: 'puzzle', label: 'Puzzle' },
             { value: 'outdoor', label: 'Outdoor' },
         ]
-        //   const currToyLabels = toy.labels.map(label => {
-        //       return {value: label, label: label.charAt(0).toUpperCase()+label.slice(1)}
-        //   })
-
+          const currToyLabels = toy.labels.map(label => {
+              return {value: label, label: label.charAt(0).toUpperCase()+label.slice(1)}
+          })
+console.log('selectedOption', selectedOption)
         return (
             <section>
-                <form className="toy-edit-form" onSubmit={this.onSaveToy}>
+                <form className="toy-edit-form flex flex-column" onSubmit={this.onSaveToy}>
                     <label htmlFor="toy-name"><h3>Name:</h3></label>
                     <input type="text" name="name" value={toy.name} id="toy-name" onChange={this.onHandleChange} required />
 
+                    <label htmlFor="imageFile" className="label-for-img tooltip">
+                            <span className="tooltiptext">Load image</span>
+                            <img className="action-img note-img-select" src="assets/img/image.png"></img>
+                            <input className="img-input" hidden={true} type="file" accept="image/*" id="imageFile" name='imageFile'/>
+                        </label>
+
                     <label htmlFor="edit-img">Image</label>
                     <input type="url" name="img" id="edit-img" value={toy.img} onChange={this.onHandleChange} />
-                    <img src={toy.img || defaultImage} alt="toy" />
+                    <img className="toy-img" src={toy.img || defaultImage} alt="toy" />
 
                     <label htmlFor="toy-ctg"><h3>Price:</h3></label>
                     <input autoComplete="false" name="price" type="text"
@@ -102,7 +115,7 @@ class _ToyEdit extends React.Component {
                         isMulti
                         autoFocus
                         isSearchable
-                        value={selectedOption}
+                        value={currToyLabels}  
                     />
 
                     <div><button>Save Changes</button> <button onClick={this.onGoBack}>Back</button></div>

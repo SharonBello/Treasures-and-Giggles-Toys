@@ -7,6 +7,7 @@ export function loadToy() {
     return (dispatch, getState) => {
         const filterBy = getState().toyModule.filterBy
         return toyService.query(filterBy).then((toys) => {
+            console.log('toys', toys)
             dispatch({
                 type: 'SET_TOYS',
                 toys

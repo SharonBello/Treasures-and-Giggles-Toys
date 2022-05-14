@@ -1,0 +1,20 @@
+.toy-filter-container {
+  align-items: center;
+  gap: rem(20px);
+  margin-left: rem(20px);
+  margin-top: rem(50px);
+    
+}
+
+.toy-filter-no-labels {
+    align-items: center;
+    margin-left: rem(20px);
+} 
+
+.toy-label {
+    flex-wrap: wrap;
+}
+
+.toy-btn-add {
+    margin-left: rem(20px);
+}
