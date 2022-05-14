@@ -6,6 +6,7 @@ import { login, signup, logout } from '../store/actions/user.action.js'
 import { LoginSignup } from './login-signup.jsx'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import Dialog from '@mui/material/Dialog'
+import DialogTitle from '@mui/material/DialogTitle';
 
 import { Search, LogoFull } from "../services/svg.service.js";
 
@@ -36,14 +37,37 @@ class _AppHeader extends React.Component {
         this.props.logout()
     }
 
-    onHandleOpen = () => {
+    handleOpenDialog = () => {
         this.setState({ isModalOpen: true })
     }
     
-    onHandleClose = () => {
+    onHandleCloseDialog = (ev) => {
+
         this.setState({ isModalOpen: false })
     }
 
+    renderModal = () => {
+        if (this.state.isModalOpen) {
+            console.log("dialog open");
+            return (
+                <Dialog onClose={this.onHandleCloseDialog} open={true} >{this.renderLogin()} 
+                <DialogTitle>SignIn</DialogTitle>
+                </Dialog> 
+            )
+        }
+    }
+
+    renderLogin = () => {
+        if (this.props.user) {
+            return (
+                <button className="user-info" onClick={this.onLogout}>Logout</button>
+            )
+        } else {
+            return (
+                <LoginSignup onLogin={this.onLogin} onSignup={this.onSignup} />
+            )
+        }
+    }
     render() {
         const { user } = this.props
         const { searchTerm } = this.state
@@ -67,24 +91,16 @@ class _AppHeader extends React.Component {
                         <input type="text" className="input-search" placeholder="Search" value={searchTerm} onChange={this.onHandleChange}></input>
                         <button className="main-header-search" ><Search /></button>
                     </div>
-                    <button onClick={() => this.onHandleOpen()}><AccountCircleIcon /></button>
-                    <Dialog open={this.state.isModalOpen}
-                    
-                    
-                    
-                    onClose={this.onHandleClose()}>X</Dialog>
+                    <button onClick={this.handleOpenDialog}><AccountCircleIcon /></button>
+                    {this.renderModal()}
                 </section>
 
                 <div className="header-title">
                     <LogoFull />
                     <p>Treasures<br></br><span>&</span><br></br>Giggles</p>
                 </div>
-
-                {user && <section className="user-info">
-                <button onClick={this.onLogout}>Logout</button></section>}
-                {!user && <section className="user-info">
-                <LoginSignup onLogin={this.onLogin} onSignup={this.onSignup} />
-                </section>}
+                {this.renderLogin()}
+                
             </header>
         )
     }

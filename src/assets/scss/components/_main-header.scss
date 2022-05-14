@@ -3,7 +3,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border-bottom: 2px solid green;
 
     img {
         // opacity: 0.5;
@@ -99,7 +98,6 @@
         align-items: center;
         justify-content: center;
         width: 100%;
-        border: 2px solid green;
         margin-top: 2em;
         flex-grow: 1;
 
@@ -125,14 +123,10 @@
         }
     }
 
-    .user-info {
-
-        .login-signup-container {
-            border: 1px solid turquoise;
-            display: flex;
-            flex-direction: row;
-            margin-top: 0;
-            display: none;
-        }
+    .login-signup-container {
+        display: flex;
+        flex-direction: row;
+        margin-top: 0;
+        display: none;
     }
 }
