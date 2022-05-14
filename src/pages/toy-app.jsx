@@ -69,12 +69,12 @@ class _ToyApp extends React.Component {
         // this.setState((prevState) => ({ toy: {...prevState.toy, 
         //     labels: labels.map(option => option.value)} }))
 
-        this.setState({ filter: { ...this.state.filter, labels } })
         let { filterBy } = this.props
-        const labelsToys = this.state.filter.labels.map(label => label.value)
-        filterBy = { ...filterBy, labels: labelsToys }
-        this.props.setFilter(filterBy)
+        const labelsToys = labels.map(label => label.value)
+        filterBy = {...filterBy, labels: labelsToys}
+        this.setState(prevState => ({...prevState, filter: { ...this.state.filter, labels }}), () => this.props.setFilter(filterBy))
     }
+
 
 
     render() {
