@@ -4,38 +4,43 @@ export class About extends React.Component {
     render() {
         return (
             <section className="about-container">
-                <h2>To Do List / Brian Bilston</h2>
-                <p>delay; defer; equivocate<br></br>
-                    make some tea; procrastinate<br></br>
-                    look at Twitter; stroke the cat<br></br>
-                    readjust the thermostat<br></br><br></br>
+                <h2>Toy Song for Kids </h2>
+                <p>Do you want a new toy?
+I know where to shop!<br></br>
+Come and see the new toys<br></br>
+at <span className="store-name" >Treasures & Giggles</span> Toy Stop!<br></br>
+<br></br>
+Do you want a bear, bear, bear?<br></br>
+It’s in a chair, chair, chair!<br></br>
+<br></br>
+Do you want a doll, doll, doll?<br></br>
+It’s really tall, tall, tall!<br></br>
+<br></br>
+Do you want a train, train, train?<br></br>
+It’s by the plane, plane, plane!<br></br>
+<br></br>
+Do you want a ball, ball, ball?<br></br>
+It’s really small, small, small.<br></br>
 
-                    dawdle; dither; hem and haw<br></br>
-                    fill the kettle; chew my jaw<br></br>
-                    write nine words; spin on chair<br></br>
-                    play six games of solitaire<br></br><br></br>
+I want a bear, bear, bear<br></br>
+that’s in the chair, chair, chair.<br></br>
+<br></br>
+I want a doll, doll, doll<br></br>
+that’s really tall, tall, tall.<br></br>
+<br></br>
+I want a train, train, train
+that’s by the plane, plane, plane.
+<br></br>
+I want a ball, ball, ball<br></br>
+that’s really small, small, small.<br></br>
+<br></br>
+I would like a new toy.<br></br>
+I know where to shop.<br></br>
 
-                    observe the merry, dappled light<br></br>
-                    dancing on the page of white<br></br>
-                    review my words; paper scrunch<br></br>
-                    stroke the cat; break for lunch<br></br><br></br>
-
-                    prioritise new tasks to shirk<br></br>
-                    ponder changing world of work<br></br>
-                    look at Twitter; spin on chair<br></br>
-                    make a brew; loiter; stare<br></br><br></br>
-
-                    check out latest cricket score<br></br>
-                    reorganise the kitchen drawer<br></br>
-                    write nine words; cross six out<br></br>
-                    stroke the cat; stoke self-doubt<br></br><br></br>
-
-                    make tea; stroke cat; cricket; stare<br></br>
-                    Twitter; chair-spin; solitaire<br></br>
-                    stroke tea; make cat; twicket; wallow<br></br>
-                    write To Do list for tomorrow<br></br>
-                </p>
-            </section>
+Come and see the new toys<br></br>
+at <span className="store-name" >Treasures & Giggles</span> Stop!<br></br>          
+</p>
+</section>
         )
     }
 }
