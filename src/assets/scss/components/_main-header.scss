@@ -136,4 +136,36 @@
         margin-top: 0;
         // display: none;
     }
+    .signup-container {
+        display: flex;
+        flex-direction: row;
+        margin-top: 0;
+        display: none;
+    }
+}
+
+
+.user-msg {
+    color:white;
+    padding: 10px;
+    font-size: 1.4em;
+    position: fixed;
+    top: rem(200px);
+    right:0;
+    background-color: grey;
+}
+
+.user-msg button {
+    float:right;
+    border:0;
+    border-radius: 50%;
+    margin: 5px;
+}
+
+.success {
+    background-color: rgb(181, 237, 193);
+}
+
+.danger {
+    background-color: rgb(228, 146, 146);
 }

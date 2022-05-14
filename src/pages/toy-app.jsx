@@ -1,10 +1,9 @@
 
 import React from "react"
 import { connect } from 'react-redux'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { userService } from "../services/user.service.js"
 import { toyService } from "../services/toy.service.js"
-// import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 import { ToyList } from "../cmps/toy-list.jsx";
 import { ToyFilter } from "../cmps/toy-filter.jsx";
 import { loadToy, removeToy, setFilter, saveToy } from '../store/actions/toy.action.js'
@@ -45,7 +44,7 @@ class _ToyApp extends React.Component {
         filterBy = { ...filterBy, pageIdx: +filterBy.pageIdx + 1 }
         this.props.setFilter(filterBy)
     }
-    
+
     onChangePage = (diff) => {
         let { filterBy } = this.props
         const numOfPages = toyService.getNumOfPages()
@@ -59,23 +58,23 @@ class _ToyApp extends React.Component {
         const field = target.name
         let { value } = target
         let { filterBy } = this.props
-        if(field === 'labels') value = [target.value]
+        if (field === 'labels') value = [target.value]
         filterBy = { ...filterBy, [field]: value }
         this.props.setFilter(filterBy)
     }
 
-    
+
     handleChangeLabels = (labels) => {
         console.log('handleChangeLabels', labels)
         // this.setState((prevState) => ({ toy: {...prevState.toy, 
         //     labels: labels.map(option => option.value)} }))
 
-        this.setState({ filter: { ...this.state.filter, labels }})
         let { filterBy } = this.props
-        const labelsToys = this.state.filter.labels.map(label => label.value)
+        const labelsToys = labels.map(label => label.value)
         filterBy = {...filterBy, labels: labelsToys}
-        this.props.setFilter(filterBy)
+        this.setState(prevState => ({...prevState, filter: { ...this.state.filter, labels }}), () => this.props.setFilter(filterBy))
     }
+
 
 
     render() {
@@ -83,18 +82,11 @@ class _ToyApp extends React.Component {
         const { user } = this.state
         return (
             <section className="app-section">
-                
-                {/* <div className="pagings">
-                    <label htmlFor='by-pageIdx'>Choose Page</label>
-                    <button onClick={this.pageDown}>-</button>
-                    <h3 style={{ display: 'inline' }}>-{this.props.filterBy.pageIdx + 1}-</h3>
-                    <button onClick={this.pageUp}>+</button>
-                </div> */}
-                <ToyFilter filterBy={filterBy} onHandleChange={this.onHandleChange}   onChangePage={this.onChangePage} handleChangeLabels={this.handleChangeLabels} labels={this.state.filter.labels}/>
-                {/* {user && <Link to="/toy/edit"><button>Add Toy 📋</button></Link>} */}
-                <Link to="/toy/edit"><button className="toy-btn-add">Add Toy 📋</button></Link>
+
+                <ToyFilter filterBy={filterBy} onHandleChange={this.onHandleChange} onChangePage={this.onChangePage} handleChangeLabels={this.handleChangeLabels} labels={this.state.filter.labels} />
+                <Link to="/toy/edit"><button className="toy-btn-add tooltip"><span className="tooltiptext">{(!user) ? 'Need to login' : ''}</span>Add Toy 📋</button></Link>
                 {(!toys) ? <h1>Loading</h1> : <ToyList toys={toys} onRemoveToy={this.onRemoveToy} />}
-                
+
             </section>
         )
     }

@@ -1,13 +1,10 @@
-
 import React from "react"
 import { connect } from 'react-redux'
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
 import { toyService } from "../services/toy.service.js"
 import { userService } from "../services/user.service.js"
-// import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 
-// import { addActivity } from "../store/actions/user.action.js"
 import { saveToy, loadToy, addToy, setSelected } from "../store/actions/toy.action.js"
 import defaultImage from '../assets/img/1.png'
 
@@ -16,7 +13,7 @@ class _ToyEdit extends React.Component {
     state = {
         toy: toyService.getEmptyToy(),
         user: userService.getLoggedinUser(),
-        selectedOption:[]
+        selectedOption: []
     }
 
     componentDidMount() {
@@ -33,20 +30,13 @@ class _ToyEdit extends React.Component {
         this.props.history.push('/toy')
     }
 
-    // handleChange = (selectedOption) => {
-    //     console.log('selectedOption', selectedOption)
-    //     this.setState((prevState) => ({
-    //         toy: {
-    //             ...prevState.toy,
-    //             // labels: selectedOption.map(option => option.value)} }))
-    //             labels: this.props.setSelected.map(option => option.value)
-    //         }
-    //     }))
-    // }
-
     handleChange = (selectedOption) => {
-        this.setState((prevState) => ({ toy: {...prevState.toy, 
-            labels: selectedOption.map(option => option.value)} }))
+        this.setState((prevState) => ({
+            toy: {
+                ...prevState.toy,
+                labels: selectedOption.map(option => option.value)
+            }
+        }))
     }
 
     onHandleChange = ({ target }) => {
@@ -82,10 +72,10 @@ class _ToyEdit extends React.Component {
             { value: 'puzzle', label: 'Puzzle' },
             { value: 'outdoor', label: 'Outdoor' },
         ]
-          const currToyLabels = toy.labels.map(label => {
-              return {value: label, label: label.charAt(0).toUpperCase()+label.slice(1)}
-          })
-console.log('selectedOption', selectedOption)
+        const currToyLabels = toy.labels.map(label => {
+            return { value: label, label: label.charAt(0).toUpperCase() + label.slice(1) }
+        })
+
         return (
             <section>
                 <form className="toy-edit-form flex flex-column" onSubmit={this.onSaveToy}>
@@ -115,7 +105,7 @@ console.log('selectedOption', selectedOption)
                         isMulti
                         autoFocus
                         isSearchable
-                        value={currToyLabels}  
+                        value={currToyLabels}
                     />
 
                     <div><button>Save Changes</button> <button onClick={this.onGoBack}>Back</button></div>

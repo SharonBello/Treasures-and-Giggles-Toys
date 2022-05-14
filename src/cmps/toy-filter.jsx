@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from 'react-redux'
-import {  setFilter } from '../store/actions/toy.action.js'
+import { setFilter } from '../store/actions/toy.action.js'
 import MultiSelect from 'react-select'
 
 const options = [
@@ -11,13 +11,13 @@ const options = [
     { value: 'doll', label: 'Doll' },
     { value: 'puzzle', label: 'Puzzle' },
     { value: 'outdoor', label: 'Outdoor' },
-  ]
+]
 
-export class _ToyFilter extends React.Component{
+export class _ToyFilter extends React.Component {
 
-    render(){
+    render() {
         const { onHandleChange, filterBy, onChangePage, labels, handleChangeLabels } = this.props
-         return (
+        return (
             <div className="toy-filter-container flex flex-column">
                 <div className="toy-filter-no-labels flex flex-row">
                     <input name="txt" type="search" placeholder="Search..." value={filterBy.txt} onChange={onHandleChange} />
@@ -51,26 +51,26 @@ export class _ToyFilter extends React.Component{
                         <button onClick={() => onChangePage(1)}>+</button>
                     </div>
                 </div>
-                <div className="toy-label flex "> 
-                < MultiSelect
-                            value={labels}
-                            closeMenuOnSelect={false}
-                            onChange={handleChangeLabels}
-                            isMulti
-                            name="labels"
-                            options={options}
-                            className="basic-multi-select"
-                            classNamePrefix="select"
-                        />
+                <div className="toy-label flex ">
+                    < MultiSelect
+                        value={labels}
+                        closeMenuOnSelect={false}
+                        onChange={handleChangeLabels}
+                        isMulti
+                        name="labels"
+                        options={options}
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                    />
                 </div>
 
-            {/* <select name="labels" onChange={onHandleChange} multiple size={5}>
+                {/* <select name="labels" onChange={onHandleChange} multiple size={5}>
                 {toyService.getLabels().map(label => <option key={label} value={label}>{label}</option>)}
             </select> */}
 
-        </div>
-    )
-}
+            </div>
+        )
+    }
 }
 
 const mapStateToProps = (storeState) => {
@@ -81,7 +81,7 @@ const mapStateToProps = (storeState) => {
 }
 
 const mapDispatchToProps = {
-    setFilter, 
+    setFilter,
 }
 
 export const ToyFilter = connect(

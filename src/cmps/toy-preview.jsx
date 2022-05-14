@@ -1,7 +1,4 @@
-
-
-import {Link} from 'react-router-dom'
-import { toyService } from '../services/toy.service'
+import { Link } from 'react-router-dom'
 import Train from "../assets/img/Train.jpg"
 import Toy_Bricks from "../assets/img/Toy_Bricks.jpg"
 import Teddy_Bear from "../assets/img/Teddy_Bear.jpg"
@@ -14,18 +11,18 @@ import Rabit_Toy from '../assets/img/Rabit_Toy.jpg'
 import defaultImage from '../assets/img/1.png'
 
 export function ToyPreview({ toy, onRemoveToy }) {
-    console.log('toy from preview', toy)
-    return (        
+    const isDone = (toy.status === 'done') ? 'line-through' : 'none'
+
+    return (
         <li className="toy-preview flex flex-column">
             <p className="toy-price">Price: <span>{toy.price}</span></p>
-            <p className="toy-labels">Labels: <span>{toy.labels.map((label,idx) => {
-                console.log('label',label )
-                return (idx === toy.labels.length-1) ? label : label+', '
-            } )}</span></p>
-            {toy.name === 'Train' && <img className='card-image' src={Train} alt="img of train"/>}
-            {toy.name === 'Robot' && <img className='card-image' src={Robot} alt="img of Robot"/>}
-            {toy.name === 'Stuffed_Monkey' && <img className='card-image' src={Stuffed_Monkey} alt="img of train"/>}
-            <img className='toy-img' src={toy.img || defaultImage} alt="a Toy"/>
+            <p className="toy-labels">Labels: <span>{toy.labels.map((label, idx) => {
+                return (idx === toy.labels.length - 1) ? label : label + ', '
+            })}</span></p>
+            {toy.name === 'Train' && <img className='card-image' src={Train} alt="img of train" />}
+            {toy.name === 'Robot' && <img className='card-image' src={Robot} alt="img of Robot" />}
+            {toy.name === 'Stuffed_Monkey' && <img className='card-image' src={Stuffed_Monkey} alt="img of train" />}
+            <img className='toy-img' src={toy.img || defaultImage} alt="a Toy" />
             <div className='toy-preview-btns flex flex-row'>
                 <button onClick={() => onRemoveToy(toy._id)} className='toy-preview-btn'>x</button>
                 <Link to={`/toy/edit/${toy._id}`}><button className='toy-preview-btn'>Edit</button></Link>
