@@ -7,7 +7,6 @@ import '../src/assets/scss/main.scss'
 
 import routes from "./routes"
 
-
 function _App(props) {
   return (
     <div id="app" className="main-layout">
@@ -22,7 +21,7 @@ function _App(props) {
      
       <AppFooter />
     </div>
-  );
+  )
 }
 
 function mapStateToProps(storeState) {

@@ -33,14 +33,10 @@ function query(filterBy = { txt: '', pageIdx: 0, labels: [] }) {
                     return JSON.parse(filterBy.inStock) === toy.inStock
                 })
             }
-            if (filterBy.labels[0] !== 'All') {
-                if (filterBy.labels.length > 0) {
-                    filterBy.labels.forEach(label => {
-                        toys = toys.filter(toy =>
-                            toy.labels.indexOf(label) !== -1)
-                    })
-                }
-            } 
+            if (filterBy.labels.length > 0) {
+                toys = toys.filter(toy =>
+                    toy.labels.filter(label => filterBy.labels.includes(label)).length > 0)
+            }
 
             if (filterBy.sortBy === 'name') {
                 toys = toys.sort((a, b) => {
@@ -95,7 +91,8 @@ function getEmptyToy() {
         labels: [],
         createdAt: Date.now(),
         review: 'every good one',
-        inStock: true
+        inStock: true,
+        img: ''
     }
 }
 
@@ -104,5 +101,5 @@ function getNumOfPages() {
 }
 
 // TEST DATA
-//  storageService.post(STORAGE_KEY, {name: 'Doll', price: 100.30,labels: ["Doll", "Baby"], "createdAt": 1631031801010, "inStock": true, "review": 'Ok'}).then(x => console.log(x))
+//  storageService.post(STORAGE_KEY, {name: 'Robot', price: 50.30,labels: ["On wheels", "Baby"], "createdAt": 1631031801010, "inStock": true, "review": 'Ok', img: '../assets/img/Train.jpg'}).then(x => console.log(x))
 

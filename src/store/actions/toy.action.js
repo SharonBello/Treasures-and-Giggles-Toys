@@ -5,12 +5,11 @@ import { showSuccessMsg, showErrorMsg } from '../../services/event-bus.service.j
 export function loadToy() {
 
     return (dispatch, getState) => {
-        console.log('global state:', getState())
         const filterBy = getState().toyModule.filterBy
         return toyService.query(filterBy).then((toys) => {
             dispatch({
                 type: 'SET_TOYS',
-                toys,
+                toys
             })
         })
     }
@@ -91,6 +90,15 @@ export function setFilter(filterBy) {
         return dispatch({
             type: 'SET_FILTERBY',
             filterBy,
+        })
+    }
+}
+
+export function setSelected(selectedOption) {
+    return (dispatch) => {
+        return dispatch({
+            type: 'GET_SELECTED',
+            selectedOption
         })
     }
 }

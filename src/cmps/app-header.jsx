@@ -42,7 +42,7 @@ class _AppHeader extends React.Component {
     }
     
     onHandleCloseDialog = (ev) => {
-
+        ev.preventDefault()
         this.setState({ isModalOpen: false })
     }
 

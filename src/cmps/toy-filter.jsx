@@ -1,10 +1,24 @@
-import { toyService } from "../services/toy.service";
-// import Select from 'react-select'
+import React from "react"
+import { connect } from 'react-redux'
+import {  setFilter } from '../store/actions/toy.action.js'
+import MultiSelect from 'react-select'
 
-export function ToyFilter({ onHandleChange, filterBy, onChangePage }) {
-    return (
+const options = [
+    { value: 'on wheels', label: 'On wheels' },
+    { value: 'box game', label: 'Box game' },
+    { value: 'art', label: 'Art' },
+    { value: 'baby', label: 'Baby' },
+    { value: 'doll', label: 'Doll' },
+    { value: 'puzzle', label: 'Puzzle' },
+    { value: 'outdoor', label: 'Outdoor' },
+  ]
 
-        <div className="toy-filter-container">
+export class _ToyFilter extends React.Component{
+
+    render(){
+        const { onHandleChange, filterBy, onChangePage, labels, handleChangeLabels } = this.props
+         return (
+            <div className="toy-filter-container">
             <input name="txt" type="search" placeholder="Search..." value={filterBy.txt} onChange={onHandleChange} />
             <label htmlFor='in-stock'>In stock:</label>
             <select name='inStock' id='by-stock' onChange={onHandleChange}>
@@ -24,9 +38,20 @@ export function ToyFilter({ onHandleChange, filterBy, onChangePage }) {
                 <option value='recent'>Recently Added</option>
             </select>
 
-            <select name="labels" onChange={onHandleChange} multiple size={5}>
+            < MultiSelect
+                        value={labels}
+                        closeMenuOnSelect={false}
+                        onChange={handleChangeLabels}
+                        isMulti
+                        name="labels"
+                        options={options}
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                    />
+
+            {/* <select name="labels" onChange={onHandleChange} multiple size={5}>
                 {toyService.getLabels().map(label => <option key={label} value={label}>{label}</option>)}
-            </select>
+            </select> */}
             <div className="pagings">
                 <label htmlFor='by-pageIdx'>Choose Page</label>
                 <button onClick={() => onChangePage(-1)}>-</button>
@@ -41,3 +66,20 @@ export function ToyFilter({ onHandleChange, filterBy, onChangePage }) {
         </div>
     )
 }
+}
+
+const mapStateToProps = (storeState) => {
+    return {
+        toys: storeState.toyModule.toys,
+        filterBy: storeState.toyModule.filterBy
+    }
+}
+
+const mapDispatchToProps = {
+    setFilter, 
+}
+
+export const ToyFilter = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(_ToyFilter)
