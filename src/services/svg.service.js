@@ -1,3 +1,5 @@
+// import HomeIcon from '@mui/icons-material/Home'
+
 export function LogoFull() {
     return (
         <svg width="45" viewBox="137.26 114.22 100.43 107.23">
@@ -21,3 +23,12 @@ export function ArrowRight() {
         <svg viewBox="0 0 6 10.572"><path fill="currentColor" d="M3.856 5.286.232 1.361a.8.8 0 0 1 0-1.124.787.787 0 0 1 1.118 0l4.418 4.49a.8.8 0 0 1 0 1.125l-4.42 4.486a.785.785 0 0 1-1.118 0 .8.8 0 0 1 0-1.124Z" /></svg>
     )
 }
+
+export function HomeIcon() {
+    return (
+      <svg >
+        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+      </svg>
+    )
+  }
+  

@@ -4,15 +4,15 @@ import { connect } from 'react-redux'
 import { loadToy } from '../store/actions/toy.action.js'
 import { login, signup, logout } from '../store/actions/user.action.js'
 import { LoginSignup } from './login-signup.jsx'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import Dialog from '@mui/material/Dialog'
 
-
-import { userService } from '../services/user.service.js'
-import { toyService } from '../services/toy.service.js'
-import { ArrowLeft, ArrowRight, Search, LogoFull } from "../services/svg.service.js";
+import { Search, LogoFull } from "../services/svg.service.js";
 
 class _AppHeader extends React.Component {
     state = {
-        searchTerm: ''
+        searchTerm: '',
+        isModalOpen: false
     }
 
     onHandleChange = ({ target }) => {
@@ -36,6 +36,14 @@ class _AppHeader extends React.Component {
         this.props.logout()
     }
 
+    onHandleOpen = () => {
+        this.setState({ isModalOpen: true })
+    }
+    
+    onHandleClose = () => {
+        this.setState({ isModalOpen: false })
+    }
+
     render() {
         const { user } = this.props
         const { searchTerm } = this.state
@@ -44,12 +52,12 @@ class _AppHeader extends React.Component {
                 <img src="img/carousel.gif" alt="" />
 
                 <section className="main-header-nav">
-                <div>
-                    <ul className="main-nav clean-list flex">
-                        <li className=" btn-light"><NavLink to="/">Home</NavLink></li>
-                        <li className="home-link btn-light"><NavLink to="/toy">Toys</NavLink></li>
-                        <li className=" btn-light"><NavLink to="/about">About</NavLink></li>
-                    </ul>
+                    <div>
+                        <ul className="main-nav clean-list flex">
+                            <li className=" btn-light"><NavLink to="/">Home</NavLink></li>
+                            <li className="home-link btn-light"><NavLink to="/toy">Toys</NavLink></li>
+                            <li className=" btn-light"><NavLink to="/about">About</NavLink></li>
+                        </ul>
                     </div>
 
                     <div className="sale-offers">Coupon-Code<span>SUM2022</span></div>
@@ -59,6 +67,12 @@ class _AppHeader extends React.Component {
                         <input type="text" className="input-search" placeholder="Search" value={searchTerm} onChange={this.onHandleChange}></input>
                         <button className="main-header-search" ><Search /></button>
                     </div>
+                    <button onClick={() => this.onHandleOpen()}><AccountCircleIcon /></button>
+                    <Dialog open={this.state.isModalOpen}
+                    
+                    
+                    
+                    onClose={this.onHandleClose()}>X</Dialog>
                 </section>
 
                 <div className="header-title">
@@ -66,19 +80,10 @@ class _AppHeader extends React.Component {
                     <p>Treasures<br></br><span>&</span><br></br>Giggles</p>
                 </div>
 
-                {/* <div className="main-header-slide-info slide-info">
-                    <span className="slide-pager-controler">
-                        <button className="pager prev btn-dark"><ArrowLeft /></button>
-                        <button className="pager next btn-dark"><ArrowRight /></button>
-                    </span>
-                </div> */}
-
-                {/* <p>{user.fullname} {user.balance &&<span>${user.balance.toLocaleString()}</span>}</p> */}
                 {user && <section className="user-info">
-                    <button onClick={this.onLogout}>Logout</button>
-                </section>}
+                <button onClick={this.onLogout}>Logout</button></section>}
                 {!user && <section className="user-info">
-                    <LoginSignup onLogin={this.onLogin} onSignup={this.onSignup} />
+                <LoginSignup onLogin={this.onLogin} onSignup={this.onSignup} />
                 </section>}
             </header>
         )

@@ -103,7 +103,7 @@
         margin-top: 2em;
         flex-grow: 1;
 
-        svg{
+        svg {
             margin-top: 0.5em;
             filter: drop-shadow(0px 0px 3px $clr8);
         }
@@ -125,11 +125,14 @@
         }
     }
 
-    .login-signup-container {
-        border: 1px solid turquoise;
-        display: flex;
-        flex-direction: row;
-        margin-top: 0;
+    .user-info {
 
+        .login-signup-container {
+            border: 1px solid turquoise;
+            display: flex;
+            flex-direction: row;
+            margin-top: 0;
+            display: none;
+        }
     }
 }
