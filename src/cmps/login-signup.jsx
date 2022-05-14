@@ -1,4 +1,8 @@
 import React from "react"
+import Button from '@mui/material/Button'
+import TextField from '@mui/material/TextField'
+import Dialog from '@mui/material/Dialog'
+
 export class LoginSignup extends React.Component {
     state = {
         credentials: {
@@ -6,7 +10,8 @@ export class LoginSignup extends React.Component {
             password: '',
             fullname: ''
         },
-        isSignup: false
+        isSignup: false,
+        // isSignupModalOpen: false
     }
 
     clearState = () => {
@@ -16,95 +21,118 @@ export class LoginSignup extends React.Component {
                 password: '',
                 fullname: ''
             },
-            isSignup: false
+            isSignup: false,
+            // isSignupModalOpen: false
         }
         this.setState({ clearTemplate })
     }
 
-    handleChange = (ev) => {
-        const field = ev.target.name;
+    handleChange = (ev, fieldName) => {
         const value = ev.target.value;
-        this.setState({ credentials: { ...this.state.credentials, [field]: value } });
+        if (fieldName === 'username') {
+            this.setState({ credentials: { ...this.state.credentials, username: value } });
+        } else if (fieldName === 'password') {
+            this.setState({ credentials: { ...this.state.credentials, password: value } });
+        }
     }
 
     onLogin = (ev = null) => {
         if (!this.state.credentials.username || !this.state.credentials.password) return;
         if (ev) ev.preventDefault();
         this.props.onLogin(this.state.credentials);
+
         this.clearState()
+        this.props.onCloseModal(ev)
     }
 
-    onSignup = (ev = null) => {
-        if (!this.state.credentials.username || !this.state.credentials.password || !this.state.credentials.fullname) return;
-        if (ev) ev.preventDefault();
-        this.props.onSignup(this.state.credentials);
-        this.clearState()
-    }
+    // onSignup = (ev = null) => {
+    //     if (!this.state.credentials.username || !this.state.credentials.password || !this.state.credentials.fullname) return;
+    //     if (ev) ev.preventDefault();
+    //     this.props.onSignup(this.state.credentials);
+    //     this.clearState()
+    // }
 
-    toggleSignup = () => {
-        this.setState({ isSignup: !this.state.isSignup })
-    }
+    // handleOpenSignupDialog = () => {
+    //     this.setState({ isSignupModalOpen: true })
+    // }
+
+    // onHandleCloseSignUpDialog = (ev) => {
+    //     ev.preventDefault()
+    //     this.setState({ isSignupModalOpen: false })
+    // }
+
+    // renderSignupModal = () => {
+    //     if (this.state.isSignupModalOpen) {
+    //         return (
+    //             <Dialog onClose={this.onHandleCloseSignUpDialog} open={true} >{this.renderSignup()}
+    //             </Dialog>
+    //         )
+    //     }
+    // }
 
     render() {
         const { username, password, fullname } = this.state.credentials;
         const { isSignup } = this.state;
         return (
-            <section className="login-signup-container">
             <div className="login-page">
-                <button className="signup-btn">
-                    <a href="/" onClick={this.toggleSignup}>{!isSignup ? 'Signup' : 'Login'}</a>
-                </button>
-                {!isSignup && <form className="login-form" onSubmit={this.onLogin}>
-                    <input
-                        type="text"
-                        name="username"
+                {!isSignup && <form>
+                    <TextField
+                        label="username"
+                        variant="filled"
+                        required
                         value={username}
-                        placeholder="Username"
-                        onChange={this.handleChange}
-                        required
-                        autoFocus
+                        onChange={(ev) => this.handleChange(ev, 'username')}
                     />
-                    <input
+                    <TextField
+                        label="Password"
+                        variant="filled"
                         type="password"
-                        name="password"
-                        value={password}
-                        placeholder="Password"
-                        onChange={this.handleChange}
                         required
+                        value={password}
+                        onChange={(ev) => this.handleChange(ev, 'password')}
                     />
-                    <button className="signin-btn">Login</button>
+                    <div>
+                        <Button onClick={this.onLogin} type="submit" variant="contained" color="primary" >
+                            SignIn
+                        </Button>
+                        <Button variant="contained">Cancel</Button>
+                    </div>
                 </form>}
-                </div>
                 <div className="signup-section">
-                    {isSignup && <form className="signup-form" onSubmit={this.onSignup}>
-                        <input
-                            type="text"
-                            name="fullname"
+                    {isSignup && <form>
+                        <TextField
+                            label="fullname"
+                            variant="filled"
+                            required
                             value={fullname}
-                            placeholder="Fullname"
-                            onChange={this.handleChange}
-                            required
+                            onChange={(ev) => this.handleChange(ev)}
                         />
-                        <input
-                            type="text"
-                            name="username"
+                        <TextField
+                            label="username"
+                            variant="filled"
+                            required
                             value={username}
-                            placeholder="Username"
-                            onChange={this.handleChange}
-                            required
+                            onChange={(ev) => this.handleChange(ev)}
                         />
-                        <input
+                        <TextField
+                            label="Password"
+                            variant="filled"
                             type="password"
-                            name="password"
-                            value={password}
-                            placeholder="Password"
-                            onChange={this.handleChange}
                             required
+                            value={password}
+                            onChange={(ev) => this.handleChange(ev)}
                         />
-                        <button className="signup-btn">Signup!</button>
+                        <div>
+                            <Button onClick={this.onSignup} type="submit" variant="contained" color="primary">
+                                Signup
+                            </Button>
+                            <Button variant="contained" >
+                                Cancel
+                            </Button>
+                        </div>
                     </form>}
                 </div>
-            </section>
+            </div>
         )
     }
 }

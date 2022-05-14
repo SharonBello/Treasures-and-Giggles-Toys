@@ -14,11 +14,9 @@ import Rabit_Toy from '../assets/img/Rabit_Toy.jpg'
 import defaultImage from '../assets/img/1.png'
 
 export function ToyPreview({ toy, onRemoveToy }) {
-    const isDone = (toy.status === 'done') ? 'line-through' : 'none'
     console.log('toy from preview', toy)
     return (        
         <li className="toy-preview flex flex-column">
-            <h4 style={{ textDecoration: isDone }}>{toy.name}</h4>
             <p className="toy-price">Price: <span>{toy.price}</span></p>
             <p className="toy-labels">Labels: <span>{toy.labels.map((label,idx) => {
                 console.log('label',label )

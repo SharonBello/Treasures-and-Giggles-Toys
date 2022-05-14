@@ -1,20 +1,24 @@
-import React from "react"
+import React, { Component } from "react";
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { loadToy } from '../store/actions/toy.action.js'
 import { login, signup, logout } from '../store/actions/user.action.js'
+// import { Login } from './login.jsx'
+// import { Signup } from './signup.jsx'
 import { LoginSignup } from './login-signup.jsx'
+
+import { UserMsg } from './user-msg.jsx'
+
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import Dialog from '@mui/material/Dialog'
-import DialogTitle from '@mui/material/DialogTitle';
-import { UserMsg } from './user-msg.jsx'
+import LogoutIcon from '@mui/icons-material/Logout';
 
 import { Search, LogoFull } from "../services/svg.service.js";
 
 class _AppHeader extends React.Component {
     state = {
         searchTerm: '',
-        isModalOpen: false
+        isModalOpen: false,
     }
 
     onHandleChange = ({ target }) => {
@@ -38,40 +42,20 @@ class _AppHeader extends React.Component {
         this.props.logout()
     }
 
-    handleOpenDialog = () => {
-        this.setState({ isModalOpen: true })
+    onOpenModal = () => {
+        this.setState({ isModalOpen: true }, () => {
+            console.log('onOpenModal - isModalOpen', this.state.isModalOpen)
+        })
     }
     
-    onHandleCloseDialog = (ev) => {
+    onCloseModal = (ev) => {
         ev.preventDefault()
         this.setState({ isModalOpen: false })
     }
-
-    renderModal = () => {
-        if (this.state.isModalOpen) {
-            console.log("dialog open");
-            return (
-                <Dialog onClose={this.onHandleCloseDialog} open={true} >{this.renderLogin()} 
-                <DialogTitle>SignIn</DialogTitle>
-                </Dialog> 
-            )
-        }
-    }
-
-    renderLogin = () => {
-        if (this.props.user) {
-            return (
-                <button className="user-info" onClick={this.onLogout}>Logout</button>
-            )
-        } else {
-            return (
-                <LoginSignup onLogin={this.onLogin} onSignup={this.onSignup} />
-            )
-        }
-    }
+    
     render() {
+        const { searchTerm, isModalOpen } = this.state
         const { user } = this.props
-        const { searchTerm } = this.state
         return (
             <header className="main-header">
                 <img className="toy-img-header" src="img/carousel.gif" alt="" />
@@ -80,8 +64,8 @@ class _AppHeader extends React.Component {
                 <section className="main-header-nav">
                     <div>
                         <ul className="main-nav clean-list flex">
-                            <li className=" btn-light"><NavLink to="/">Home</NavLink></li>
-                            <li className="home-link btn-light"><NavLink to="/toy">Toys</NavLink></li>
+                            <li className="home-link btn-light"><NavLink to="/">Home</NavLink></li>
+                            <li className="btn-light"><NavLink to="/toy">Toys</NavLink></li>
                             <li className=" btn-light"><NavLink to="/about">About</NavLink></li>
                         </ul>
                     </div>
@@ -93,16 +77,29 @@ class _AppHeader extends React.Component {
                         <input type="text" className="input-search" placeholder="Search" value={searchTerm} onChange={this.onHandleChange}></input>
                         <button className="main-header-search" ><Search /></button>
                     </div>
-                    <button onClick={this.handleOpenDialog}><AccountCircleIcon /></button>
-                    {this.renderModal()}
-                </section>
 
+                    <div className="login-btn-container">
+                        <button onClick={() => this.onOpenModal()}><AccountCircleIcon /></button>
+                        {isModalOpen && <Dialog onCloseModal={this.onCloseModal} open={true} >
+                        {!user && <LoginSignup onLogin={this.onLogin} onSignup={this.onSignup} onCloseModal={this.onCloseModal}/>}</Dialog>} 
+                    </div>
+
+                    <div className="signup-btn-container">
+                        <button>
+                        <i className="fa-solid fa-user-plus"></i></button>
+                        {/* {this.renderSignupModal()}
+                        {this.renderSignup()} */}
+                    </div>
+                    <div className="logout-btn-container">
+                        <button className="user-logout" onClick={() => this.onLogout()}><LogoutIcon /></button>                        
+                    </div>
+                </section>
+                <i className="fa-solid fa-user-plus"></i>
                 <div className="header-title">
                     <LogoFull />
                     <p>Treasures<br></br><span>&</span><br></br>Giggles</p>
                 </div>
-                {this.renderLogin()}
-                
+
             </header>
         )
     }

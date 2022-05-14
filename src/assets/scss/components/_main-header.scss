@@ -11,7 +11,7 @@
         position: absolute;
         inset: 0;
         z-index: -1;
-        height: 55%;
+        max-height: 40%;
     }
 
     .main-header-nav {
@@ -58,6 +58,7 @@
             flex-direction: row;
             float: right;
             margin: 0 0 0 auto;
+            display: none;
 
             .lang-switch {
                 width: 2.5em;
@@ -98,11 +99,10 @@
         align-items: center;
         justify-content: center;
         width: 100%;
-        margin-top: 2em;
         flex-grow: 1;
 
         svg {
-            margin-top: 0.5em;
+            // margin-top: 0.5em;
             filter: drop-shadow(0px 0px 3px $clr8);
         }
 
@@ -112,7 +112,8 @@
             -webkit-text-fill-color: $clr6;
             line-height: 0.5em;
             text-align: center;
-            margin-bottom: 0.4em;
+            margin: unset;
+            padding: unset;
             margin-top: 0.1em;
 
             span {
@@ -123,10 +124,16 @@
         }
     }
 
-    .login-signup-container {
+    .login-page {
         display: flex;
         flex-direction: row;
         margin-top: 0;
-        display: none;
+        visibility: hidden;
+    }
+    .signup-page {
+        display: flex;
+        flex-direction: row;
+        margin-top: 0;
+        // display: none;
     }
 }

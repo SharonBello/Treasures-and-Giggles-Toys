@@ -11,11 +11,14 @@
 
 // COMPONENTS
 @import './components/main-header';
-@import './components/pager';
-@import './components/cards';
-@import './components/sidebar';
+@import './components/toy-cards-list';
 @import './components/footer';
 @import './components/filter';
 @import './components/toy-edit';
-@import './components/about';
 @import './components/details';
+@import './components/login_signout';
+
+// PAGES
+@import './pages/home';
+@import './pages/about';
+

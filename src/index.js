@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import { App } from './root-cmp'
 import configureStore from './configure-store'
 import '../src/assets/scss/main.scss'
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 
 // import reportWebVitals from './reportWebVitals';
