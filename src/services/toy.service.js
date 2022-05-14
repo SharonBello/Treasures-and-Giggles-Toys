@@ -81,8 +81,10 @@ function save(toy) {
 }
 
 function remove(toyId) {
+    console.log('toyId' )
     return storageService.remove(STORAGE_KEY, toyId)
 }
+
 
 function getEmptyToy() {
     return {
