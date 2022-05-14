@@ -90,7 +90,7 @@ function getEmptyToy() {
         price: 0,
         labels: [],
         createdAt: Date.now(),
-        review: 'every good one',
+        review: 'Best ever',
         inStock: true,
         img: ''
     }
