@@ -58,6 +58,7 @@
             flex-direction: row;
             float: right;
             margin: 0 0 0 auto;
+            display: none;
 
             .lang-switch {
                 width: 2.5em;
@@ -123,11 +124,17 @@
         }
     }
 
-    .login-container {
+    .login-page {
         display: flex;
         flex-direction: row;
         margin-top: 0;
-        display: none;
+        visibility: hidden;
+    }
+    .signup-page {
+        display: flex;
+        flex-direction: row;
+        margin-top: 0;
+        // display: none;
     }
     .signup-container {
         display: flex;
@@ -143,7 +150,7 @@
     padding: 10px;
     font-size: 1.4em;
     position: fixed;
-    top: rem(200px);
+    top: 40%;
     right:0;
     background-color: grey;
 }

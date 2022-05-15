@@ -1,6 +1,5 @@
 import { connect } from "react-redux"
 import { Route, Switch } from "react-router-dom"
-import { inc } from './store/actions/counter.action'
 import { AppHeader} from '../src/cmps/app-header.jsx'
 import { AppFooter } from '../src/cmps/app-footer.jsx'
 import '../src/assets/scss/main.scss'
@@ -30,8 +29,5 @@ function mapStateToProps(storeState) {
     // status: storeState.statusModule.status
   }
 }
-const mapDispatchToProps = {
-  inc
-}
 
-export const App = connect(mapStateToProps, mapDispatchToProps)(_App)
+export const App = connect(mapStateToProps)(_App)

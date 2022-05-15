@@ -1,4 +1,3 @@
-
 import React from "react"
 import { connect } from 'react-redux'
 import Select from 'react-select'
@@ -30,17 +29,6 @@ class _ToyEdit extends React.Component {
     onGoBack = () => {
         this.props.history.push('/toy')
     }
-
-    // handleChange = (selectedOption) => {
-    //     console.log('selectedOption', selectedOption)
-    //     this.setState((prevState) => ({
-    //         toy: {
-    //             ...prevState.toy,
-    //             // labels: selectedOption.map(option => option.value)} }))
-    //             labels: this.props.setSelected.map(option => option.value)
-    //         }
-    //     }))
-    // }
 
     handleChange = (selectedOption) => {
         this.setState((prevState) => ({
@@ -95,10 +83,10 @@ class _ToyEdit extends React.Component {
                     <input type="text" name="name" value={toy.name} id="toy-name" onChange={this.onHandleChange} required />
 
                     <label htmlFor="imageFile" className="label-for-img tooltip">
-                        {/* <span className="tooltiptext">Load image</span> */}
-                        {/* <img className="action-img note-img-select" src="assets/img/image.png"></img> */}
-                        <input className="img-input" hidden={true} type="file" accept="image/*" id="imageFile" name='imageFile' />
-                    </label>
+                            {/* <span className="tooltiptext">Load image</span> */}
+                            {/* <img className="action-img note-img-select" src="assets/img/image.png"></img> */}
+                            <input className="img-input" hidden={true} type="file" accept="image/*" id="imageFile" name='imageFile'/>
+                        </label>
 
                     <label htmlFor="edit-img">Image</label>
                     <input type="url" name="img" id="edit-img" value={toy.img} onChange={this.onHandleChange} />

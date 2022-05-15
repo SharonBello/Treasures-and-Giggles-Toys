@@ -1,24 +1,24 @@
-import React from "react"
+import React, { Component } from "react";
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { loadToy } from '../store/actions/toy.action.js'
 import { login, signup, logout } from '../store/actions/user.action.js'
-import { Login } from './login.jsx'
-import { Signup } from './signup.jsx'
+// import { Login } from './login.jsx'
+// import { Signup } from './signup.jsx'
+import { LoginSignup } from './login-signup.jsx'
+
 import { UserMsg } from './user-msg.jsx'
 
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import Dialog from '@mui/material/Dialog'
 import LogoutIcon from '@mui/icons-material/Logout';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 
 import { Search, LogoFull } from "../services/svg.service.js";
 
 class _AppHeader extends React.Component {
     state = {
         searchTerm: '',
-        isModalOpen: false
+        isModalOpen: false,
     }
 
     onHandleChange = ({ target }) => {
@@ -42,46 +42,20 @@ class _AppHeader extends React.Component {
         this.props.logout()
     }
 
-    handleOpenDialog = () => {
-        this.setState({ isModalOpen: true })
+    onOpenModal = () => {
+        this.setState({ isModalOpen: true }, () => {
+            console.log('onOpenModal - isModalOpen', this.state.isModalOpen)
+        })
     }
-
-    onHandleCloseDialog = (ev) => {
+    
+    onCloseModal = (ev) => {
         ev.preventDefault()
         this.setState({ isModalOpen: false })
     }
-
-    renderLoginModal = () => {
-        if (this.state.isModalOpen) {
-            return (
-                <Dialog onClose={this.onHandleCloseDialog} open={true} >{this.renderLogin()}</Dialog>
-            )
-        }
-    }
-
-    renderLogin = () => {
-        return (
-            <Login onLogin={this.onLogin} onHandleCloseDialog={this.onHandleCloseDialog} handleOpenDialog={this.handleOpenDialog} isModalOpen={this.state.isModalOpen} />
-        )
-    }
-
-    renderSignupModal = () => {
-        if (this.state.isModalOpen) {
-            return (
-                <Dialog onClose={this.onHandleCloseDialog} open={true} >{this.renderSignup}</Dialog>
-            )
-        }
-    }
-
-    renderSignup = () => {
-        return (
-            <Signup onSignup={this.onSignup} onHandleCloseDialog={this.onHandleCloseDialog} handleOpenDialog={this.handleOpenDialog} isModalOpen={this.state.isModalOpen} />
-        )
-    }
-
+    
     render() {
+        const { searchTerm, isModalOpen } = this.state
         const { user } = this.props
-        const { searchTerm } = this.state
         return (
             <header className="main-header">
                 <img className="toy-img-header" src="img/carousel.gif" alt="" />
@@ -103,19 +77,21 @@ class _AppHeader extends React.Component {
                         <input type="text" className="input-search" placeholder="Search" value={searchTerm} onChange={this.onHandleChange}></input>
                         <button className="main-header-search" ><Search /></button>
                     </div>
+
                     <div className="login-btn-container">
-                        <button onClick={() => this.handleOpenDialog()}><AccountCircleIcon /></button>
-                        {this.renderLoginModal()}
-                        {this.renderLogin()}
+                        <button onClick={() => this.onOpenModal()}><AccountCircleIcon /></button>
+                        {isModalOpen && <Dialog onCloseModal={this.onCloseModal} open={true} >
+                        {!user && <LoginSignup onLogin={this.onLogin} onSignup={this.onSignup} onCloseModal={this.onCloseModal}/>}</Dialog>} 
                     </div>
+
                     <div className="signup-btn-container">
-                        <button onClick={() => this.handleOpenDialog()}>
-                            <FontAwesomeIcon baseClassName="fas" className="fa-user-plus" /></button>
-                        {this.renderSignupModal()}
-                        {this.renderSignup()}
+                        <button>
+                        <i className="fa-solid fa-user-plus"></i></button>
+                        {/* {this.renderSignupModal()}
+                        {this.renderSignup()} */}
                     </div>
                     <div className="logout-btn-container">
-                        <button className="user-logout" onClick={() => this.onLogout()}><LogoutIcon /></button>
+                        <button className="user-logout" onClick={() => this.onLogout()}><LogoutIcon /></button>                        
                     </div>
                 </section>
                 <i className="fa-solid fa-user-plus"></i>

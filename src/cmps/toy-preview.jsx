@@ -1,7 +1,4 @@
-
-
 import { Link } from 'react-router-dom'
-import { toyService } from '../services/toy.service'
 import Train from "../assets/img/Train.jpg"
 import Toy_Bricks from "../assets/img/Toy_Bricks.jpg"
 import Teddy_Bear from "../assets/img/Teddy_Bear.jpg"
@@ -18,7 +15,6 @@ export function ToyPreview({ toy, onRemoveToy }) {
 
     return (
         <li className="toy-preview flex flex-column">
-            <h4 style={{ textDecoration: isDone }}>{toy.name}</h4>
             <p className="toy-price">Price: <span>{toy.price}</span></p>
             <p className="toy-labels">Labels: <span>{toy.labels.map((label, idx) => {
                 return (idx === toy.labels.length - 1) ? label : label + ', '

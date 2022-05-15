@@ -12,7 +12,7 @@ export class Signup extends React.Component {
         isSignup: false,
         isSignupModalOpen: false
     }
-
+    
     clearState = () => {
         const clearTemplate = {
             credentials: {
@@ -50,45 +50,45 @@ export class Signup extends React.Component {
         ev.preventDefault()
         this.setState({ isSignupModalOpen: false })
     }
-
+    
     render() {
         const { username, password, fullname } = this.state.credentials;
         const { isSignup } = this.state;
         return (
-            <div className="signup-section">
-                {isSignup && <form>
-                    <TextField
-                        label="fullname"
-                        variant="filled"
-                        required
-                        value={fullname}
-                        onChange={(ev) => this.handleChange(ev)}
-                    />
-                    <TextField
-                        label="username"
-                        variant="filled"
-                        required
-                        value={username}
-                        onChange={(ev) => this.handleChange(ev)}
-                    />
-                    <TextField
-                        label="Password"
-                        variant="filled"
-                        type="password"
-                        required
-                        value={password}
-                        onChange={(ev) => this.handleChange(ev)}
-                    />
-                    <div>
-                        <Button onSubmit={this.onSignup} type="submit" variant="contained" color="primary" onClick={this.props.onHandleCloseDialog}>
-                            Signup
-                        </Button>
-                        <Button variant="contained" onClick={this.props.onHandleCloseDialog}>
-                            Cancel
-                        </Button>
-                    </div>
-                </form>}
-            </div>
+        <div className="signup-page">
+            {isSignup && <form>
+                <TextField
+                    label="fullname"
+                    variant="filled"
+                    required
+                    value={fullname}
+                    onChange={(ev) => this.handleChange(ev)}
+                />
+                <TextField
+                    label="username"
+                    variant="filled"
+                    required
+                    value={username}
+                    onChange={(ev) => this.handleChange(ev)}
+                />
+                <TextField
+                    label="Password"
+                    variant="filled"
+                    type="password"
+                    required
+                    value={password}
+                    onChange={(ev) => this.handleChange(ev)}
+                />
+                <div>
+                    <Button onSubmit={this.onSignup} type="submit" variant="contained" color="primary" onClick={this.props.onHandleCloseDialog}>
+                        Signup
+                    </Button>
+                    <Button variant="contained" onClick={this.props.onHandleCloseDialog}>
+                        Cancel
+                    </Button>
+                </div>
+            </form>}
+        </div>
         )
     }
 }

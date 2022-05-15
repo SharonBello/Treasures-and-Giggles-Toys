@@ -7,7 +7,7 @@ class _HomePage extends React.Component {
 
     render() {
         return (
-            <section>
+            <section> 
                 {/* <img className="homepage-container" src={home_page} /> */}
             </section >
         )

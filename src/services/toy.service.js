@@ -79,6 +79,7 @@ function save(toy) {
 }
 
 function remove(toyId) {
+    console.log('toyId' )
     return storageService.remove(STORAGE_KEY, toyId)
 }
 
@@ -89,7 +90,7 @@ function getEmptyToy() {
         price: 0,
         labels: [],
         createdAt: Date.now(),
-        review: 'every good one',
+        review: 'Best ever',
         inStock: true,
         img: ''
     }
